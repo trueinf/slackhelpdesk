@@ -94,6 +94,37 @@ export const ChatInterface = () => {
   const [currentDM, setCurrentDM] = useState<string | null>(null);
   const [threadPanelOpen, setThreadPanelOpen] = useState(false);
   const [selectedThreadMessage, setSelectedThreadMessage] = useState<Message | null>(null);
+  const [channels, setChannels] = useState([{
+    id: 'general',
+    name: 'general',
+    type: 'public' as const,
+    memberCount: 1247,
+    topic: 'Team discussions and updates'
+  }, {
+    id: 'random',
+    name: 'random',
+    type: 'public' as const,
+    memberCount: 892,
+    topic: 'Random conversations and fun stuff'
+  }, {
+    id: 'dev-team',
+    name: 'dev-team',
+    type: 'private' as const,
+    memberCount: 23,
+    topic: 'Development team coordination'
+  }, {
+    id: 'design',
+    name: 'design',
+    type: 'public' as const,
+    memberCount: 15,
+    topic: 'Design discussions and feedback'
+  }, {
+    id: 'marketing',
+    name: 'marketing',
+    type: 'private' as const,
+    memberCount: 8,
+    topic: 'Marketing campaigns and strategies'
+  }]);
   const currentUser = {
     username: 'You',
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=32&h=32&fit=crop&crop=face',
@@ -195,6 +226,70 @@ export const ChatInterface = () => {
     // In a real app, this would send a reply to the thread
     console.log('Thread reply:', content);
   };
+  const handleChannelCreate = (channelData: {
+    name: string;
+    description: string;
+    type: 'public' | 'private';
+  }) => {
+    const newChannel = {
+      id: `channel-${Date.now()}`,
+      name: channelData.name,
+      type: channelData.type,
+      memberCount: 1,
+      // Just the creator initially
+      topic: channelData.description || `${channelData.type === 'private' ? 'Private' : 'Public'} channel for ${channelData.name}`
+    };
+    setChannels(prev => [...prev, newChannel]);
+
+    // Auto-select the new channel
+    setCurrentChannel(newChannel.id);
+    setCurrentDM(null);
+    setThreadPanelOpen(false);
+
+    // Clear messages for the new channel (in a real app, this would fetch channel messages)
+    setMessages([]);
+  };
+  const handleChannelJoin = (channelId: string) => {
+    // In a real app, this would make an API call to join the channel
+    console.log('Joining channel:', channelId);
+
+    // For demo purposes, we'll add some mock channels that can be joined
+    const availableChannels = [{
+      id: 'announcements',
+      name: 'announcements',
+      type: 'public' as const,
+      memberCount: 1500,
+      topic: 'Important company announcements and news'
+    }, {
+      id: 'frontend-dev',
+      name: 'frontend-dev',
+      type: 'public' as const,
+      memberCount: 45,
+      topic: 'Frontend development discussions, tips, and code reviews'
+    }, {
+      id: 'backend-dev',
+      name: 'backend-dev',
+      type: 'public' as const,
+      memberCount: 38,
+      topic: 'Backend development, APIs, and infrastructure'
+    }, {
+      id: 'ux-research',
+      name: 'ux-research',
+      type: 'public' as const,
+      memberCount: 22,
+      topic: 'User experience research, testing, and insights'
+    }, {
+      id: 'coffee-chat',
+      name: 'coffee-chat',
+      type: 'public' as const,
+      memberCount: 156,
+      topic: 'Casual conversations over virtual coffee ☕'
+    }];
+    const channelToJoin = availableChannels.find(c => c.id === channelId);
+    if (channelToJoin && !channels.find(c => c.id === channelId)) {
+      setChannels(prev => [...prev, channelToJoin]);
+    }
+  };
   const getChannelInfo = () => {
     if (currentDM) {
       return {
@@ -203,39 +298,13 @@ export const ChatInterface = () => {
         topic: 'Private conversation'
       };
     }
-    const channelInfo = {
-      general: {
-        name: 'general',
-        memberCount: 1247,
-        topic: 'Team discussions and updates'
-      },
-      random: {
-        name: 'random',
-        memberCount: 892,
-        topic: 'Random conversations and fun stuff'
-      },
-      'dev-team': {
-        name: 'dev-team',
-        memberCount: 23,
-        topic: 'Development team coordination'
-      },
-      design: {
-        name: 'design',
-        memberCount: 15,
-        topic: 'Design discussions and feedback'
-      },
-      marketing: {
-        name: 'marketing',
-        memberCount: 8,
-        topic: 'Marketing campaigns and strategies'
-      }
-    };
-    return channelInfo[currentChannel as keyof typeof channelInfo] || channelInfo.general;
+    const channel = channels.find(c => c.id === currentChannel);
+    return channel || channels[0]; // Fallback to first channel
   };
   const channelInfo = getChannelInfo();
   return <div className="flex h-screen bg-gray-50" data-magicpath-id="0" data-magicpath-path="ChatInterface.tsx">
       {/* Sidebar */}
-      <Sidebar workspaceName="Acme Corp" currentUser={currentUser} onChannelSelect={handleChannelSelect} onDMSelect={handleDMSelect} data-magicpath-id="1" data-magicpath-path="ChatInterface.tsx" />
+      <Sidebar workspaceName="Acme Corp" currentUser={currentUser} onChannelSelect={handleChannelSelect} onDMSelect={handleDMSelect} onChannelCreate={handleChannelCreate} onChannelJoin={handleChannelJoin} data-magicpath-id="1" data-magicpath-path="ChatInterface.tsx" />
       
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col" data-magicpath-id="2" data-magicpath-path="ChatInterface.tsx">
