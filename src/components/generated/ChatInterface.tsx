@@ -1,7 +1,11 @@
+"use client";
+
 import React, { useState, useRef, useEffect } from 'react';
 import { ChatHeader } from './ChatHeader';
 import { MessageList } from './MessageList';
 import { MessageInput } from './MessageInput';
+import { Sidebar } from './Sidebar';
+import { ThreadPanel } from './ThreadPanel';
 interface Message {
   id: string;
   userId: string;
@@ -15,6 +19,14 @@ interface Message {
     users: string[];
   }[];
   threadCount?: number;
+  files?: Array<{
+    id: string;
+    name: string;
+    size: number;
+    type: string;
+    url: string;
+    thumbnail?: string;
+  }>;
 }
 const MOCK_MESSAGES: Message[] = [{
   id: '1',
@@ -45,43 +57,77 @@ const MOCK_MESSAGES: Message[] = [{
   userId: 'user3',
   username: 'Emily Rodriguez',
   avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face',
-  content: 'I\'ve been working on the UI components. Here\'s what I have so far:\\n\\nThe design system is looking great!',
+  content: 'I\'ve been working on the UI components. Here\'s what I have so far:\n\nThe design system is looking great!',
   timestamp: new Date(Date.now() - 1800000),
   reactions: [{
     emoji: '🎨',
     count: 2,
     users: ['user1', 'user2']
   }],
-  threadCount: 3
+  threadCount: 3,
+  files: [{
+    id: 'file1',
+    name: 'design-system.png',
+    size: 245760,
+    type: 'image/png',
+    url: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=300&fit=crop',
+    thumbnail: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=200&h=150&fit=crop'
+  }]
+}, {
+  id: '4',
+  userId: 'user4',
+  username: 'Alex Thompson',
+  avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+  content: 'Great work team! 🚀 The new features are looking solid.',
+  timestamp: new Date(Date.now() - 900000),
+  reactions: [{
+    emoji: '🚀',
+    count: 4,
+    users: ['user1', 'user2', 'user3', 'current-user']
+  }]
 }];
-
-// @component: ChatInterface
 export const ChatInterface = () => {
   const [messages, setMessages] = useState<Message[]>(MOCK_MESSAGES);
   const [isTyping, setIsTyping] = useState(false);
   const [typingUser, setTypingUser] = useState('');
-  const handleSendMessage = (content: string) => {
+  const [currentChannel, setCurrentChannel] = useState('general');
+  const [currentDM, setCurrentDM] = useState<string | null>(null);
+  const [threadPanelOpen, setThreadPanelOpen] = useState(false);
+  const [selectedThreadMessage, setSelectedThreadMessage] = useState<Message | null>(null);
+  const currentUser = {
+    username: 'You',
+    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=32&h=32&fit=crop&crop=face',
+    status: 'online' as const
+  };
+  const handleSendMessage = (content: string, files?: File[]) => {
     const newMessage: Message = {
       id: Date.now().toString(),
       userId: 'current-user',
       username: 'You',
-      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=32&h=32&fit=crop&crop=face',
+      avatar: currentUser.avatar,
       content,
       timestamp: new Date(),
-      reactions: []
+      reactions: [],
+      files: files?.map((file, index) => ({
+        id: `file-${Date.now()}-${index}`,
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        url: URL.createObjectURL(file)
+      }))
     };
     setMessages(prev => [...prev, newMessage]);
 
     // Simulate typing indicator for response
     setIsTyping(true);
-    setTypingUser('Bot');
+    setTypingUser('Assistant');
     setTimeout(() => {
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
         userId: 'bot',
         username: 'Assistant',
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
-        content: 'Thanks for your message! I\'m here to help.',
+        content: 'Thanks for your message! I\'m here to help with any questions you have.',
         timestamp: new Date(),
         reactions: []
       };
@@ -131,13 +177,76 @@ export const ChatInterface = () => {
       return message;
     }));
   };
+  const handleChannelSelect = (channelId: string) => {
+    setCurrentChannel(channelId);
+    setCurrentDM(null);
+    setThreadPanelOpen(false);
+  };
+  const handleDMSelect = (dmId: string) => {
+    setCurrentDM(dmId);
+    setCurrentChannel('');
+    setThreadPanelOpen(false);
+  };
+  const handleOpenThread = (message: Message) => {
+    setSelectedThreadMessage(message);
+    setThreadPanelOpen(true);
+  };
+  const handleSendThreadReply = (content: string) => {
+    // In a real app, this would send a reply to the thread
+    console.log('Thread reply:', content);
+  };
+  const getChannelInfo = () => {
+    if (currentDM) {
+      return {
+        name: 'Direct Message',
+        memberCount: 2,
+        topic: 'Private conversation'
+      };
+    }
+    const channelInfo = {
+      general: {
+        name: 'general',
+        memberCount: 1247,
+        topic: 'Team discussions and updates'
+      },
+      random: {
+        name: 'random',
+        memberCount: 892,
+        topic: 'Random conversations and fun stuff'
+      },
+      'dev-team': {
+        name: 'dev-team',
+        memberCount: 23,
+        topic: 'Development team coordination'
+      },
+      design: {
+        name: 'design',
+        memberCount: 15,
+        topic: 'Design discussions and feedback'
+      },
+      marketing: {
+        name: 'marketing',
+        memberCount: 8,
+        topic: 'Marketing campaigns and strategies'
+      }
+    };
+    return channelInfo[currentChannel as keyof typeof channelInfo] || channelInfo.general;
+  };
+  const channelInfo = getChannelInfo();
+  return <div className="flex h-screen bg-gray-50" data-magicpath-id="0" data-magicpath-path="ChatInterface.tsx">
+      {/* Sidebar */}
+      <Sidebar workspaceName="Acme Corp" currentUser={currentUser} onChannelSelect={handleChannelSelect} onDMSelect={handleDMSelect} data-magicpath-id="1" data-magicpath-path="ChatInterface.tsx" />
+      
+      {/* Main Chat Area */}
+      <div className="flex-1 flex flex-col" data-magicpath-id="2" data-magicpath-path="ChatInterface.tsx">
+        <ChatHeader channelName={channelInfo.name} memberCount={channelInfo.memberCount} topic={channelInfo.topic} onOpenThread={() => setThreadPanelOpen(!threadPanelOpen)} data-magicpath-id="3" data-magicpath-path="ChatInterface.tsx" />
+        
+        <MessageList messages={messages} onAddReaction={handleAddReaction} onOpenThread={handleOpenThread} isTyping={isTyping} typingUser={typingUser} data-magicpath-id="4" data-magicpath-path="ChatInterface.tsx" />
+        
+        <MessageInput onSendMessage={handleSendMessage} placeholder={`Message #${channelInfo.name}`} data-magicpath-id="5" data-magicpath-path="ChatInterface.tsx" />
+      </div>
 
-  // @return
-  return <div className="flex flex-col h-screen bg-gray-50" data-magicpath-id="0" data-magicpath-path="ChatInterface.tsx">
-      <ChatHeader channelName="general" memberCount={1247} topic="Team discussions and updates" data-magicpath-id="1" data-magicpath-path="ChatInterface.tsx" />
-      
-      <MessageList messages={messages} onAddReaction={handleAddReaction} isTyping={isTyping} typingUser={typingUser} data-magicpath-id="2" data-magicpath-path="ChatInterface.tsx" />
-      
-      <MessageInput onSendMessage={handleSendMessage} data-magicpath-id="3" data-magicpath-path="ChatInterface.tsx" />
+      {/* Thread Panel */}
+      <ThreadPanel isOpen={threadPanelOpen} onClose={() => setThreadPanelOpen(false)} parentMessage={selectedThreadMessage} threadMessages={[]} onSendReply={handleSendThreadReply} onAddReaction={handleAddReaction} data-magicpath-id="6" data-magicpath-path="ChatInterface.tsx" />
     </div>;
 };
