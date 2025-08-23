@@ -302,20 +302,20 @@ export const ChatInterface = () => {
     return channel || channels[0]; // Fallback to first channel
   };
   const channelInfo = getChannelInfo();
-  return <div className="flex h-screen bg-gray-50" data-magicpath-id="0" data-magicpath-path="ChatInterface.tsx">
+  return <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
-      <Sidebar workspaceName="Acme Corp" currentUser={currentUser} onChannelSelect={handleChannelSelect} onDMSelect={handleDMSelect} onChannelCreate={handleChannelCreate} onChannelJoin={handleChannelJoin} data-magicpath-id="1" data-magicpath-path="ChatInterface.tsx" />
+      <Sidebar workspaceName="Acme Corp" currentUser={currentUser} onChannelSelect={handleChannelSelect} onDMSelect={handleDMSelect} onChannelCreate={handleChannelCreate} onChannelJoin={handleChannelJoin} />
       
       {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col" data-magicpath-id="2" data-magicpath-path="ChatInterface.tsx">
-        <ChatHeader channelName={channelInfo.name} memberCount={channelInfo.memberCount} topic={channelInfo.topic} onOpenThread={() => setThreadPanelOpen(!threadPanelOpen)} data-magicpath-id="3" data-magicpath-path="ChatInterface.tsx" />
+      <div className="flex-1 flex flex-col">
+        <ChatHeader channelName={channelInfo.name} memberCount={channelInfo.memberCount} topic={channelInfo.topic} onOpenThread={() => setThreadPanelOpen(!threadPanelOpen)} />
         
-        <MessageList messages={messages} onAddReaction={handleAddReaction} onOpenThread={handleOpenThread} isTyping={isTyping} typingUser={typingUser} data-magicpath-id="4" data-magicpath-path="ChatInterface.tsx" />
+        <MessageList messages={messages} onAddReaction={handleAddReaction} onOpenThread={handleOpenThread} isTyping={isTyping} typingUser={typingUser} />
         
-        <MessageInput onSendMessage={handleSendMessage} placeholder={`Message #${channelInfo.name}`} data-magicpath-id="5" data-magicpath-path="ChatInterface.tsx" />
+        <MessageInput onSendMessage={handleSendMessage} placeholder={`Message #${channelInfo.name}`} />
       </div>
 
       {/* Thread Panel */}
-      <ThreadPanel isOpen={threadPanelOpen} onClose={() => setThreadPanelOpen(false)} parentMessage={selectedThreadMessage} threadMessages={[]} onSendReply={handleSendThreadReply} onAddReaction={handleAddReaction} data-magicpath-id="6" data-magicpath-path="ChatInterface.tsx" />
+      <ThreadPanel isOpen={threadPanelOpen} onClose={() => setThreadPanelOpen(false)} parentMessage={selectedThreadMessage} threadMessages={[]} onSendReply={handleSendThreadReply} onAddReaction={handleAddReaction} />
     </div>;
 };

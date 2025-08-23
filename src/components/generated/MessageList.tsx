@@ -79,32 +79,32 @@ export const MessageList = ({
   // @return
   return <div ref={scrollRef} className="flex-1 overflow-y-auto bg-white" style={{
     scrollBehavior: 'smooth'
-  }} data-magicpath-id="0" data-magicpath-path="MessageList.tsx">
-      <div className="px-4 py-4 space-y-1" data-magicpath-id="1" data-magicpath-path="MessageList.tsx">
-        {messages.map((message, index) => <div key={message.id} data-magicpath-id="2" data-magicpath-path="MessageList.tsx">
-            {shouldShowDateSeparator(message, messages[index - 1]) && <div className="flex items-center justify-center my-6" data-magicpath-id="3" data-magicpath-path="MessageList.tsx">
-                <div className="flex-1 border-t border-gray-200" data-magicpath-id="4" data-magicpath-path="MessageList.tsx"></div>
-                <div className="px-4 py-1 bg-white border border-gray-200 rounded-full text-xs font-medium text-gray-600 shadow-sm" data-magicpath-id="5" data-magicpath-path="MessageList.tsx">
+  }}>
+      <div className="px-4 py-4 space-y-1">
+        {messages.map((message, index) => <div key={message.id}>
+            {shouldShowDateSeparator(message, messages[index - 1]) && <div className="flex items-center justify-center my-6">
+                <div className="flex-1 border-t border-gray-200"></div>
+                <div className="px-4 py-1 bg-white border border-gray-200 rounded-full text-xs font-medium text-gray-600 shadow-sm">
                   {formatDateSeparator(new Date(message.timestamp))}
                 </div>
-                <div className="flex-1 border-t border-gray-200" data-magicpath-id="6" data-magicpath-path="MessageList.tsx"></div>
+                <div className="flex-1 border-t border-gray-200"></div>
               </div>}
             
-            <MessageItem message={message} onAddReaction={onAddReaction} onOpenThread={onOpenThread} showAvatar={shouldShowAvatar(message, messages[index - 1])} data-magicpath-id="7" data-magicpath-path="MessageList.tsx" />
+            <MessageItem message={message} onAddReaction={onAddReaction} onOpenThread={onOpenThread} showAvatar={shouldShowAvatar(message, messages[index - 1])} />
           </div>)}
 
         {/* Typing Indicator */}
-        {isTyping && typingUser && <div className="flex items-center space-x-3 px-4 py-3 text-sm text-gray-500" data-magicpath-id="8" data-magicpath-path="MessageList.tsx">
-            <div className="flex space-x-1" data-magicpath-id="9" data-magicpath-path="MessageList.tsx">
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" data-magicpath-id="10" data-magicpath-path="MessageList.tsx"></div>
+        {isTyping && typingUser && <div className="flex items-center space-x-3 px-4 py-3 text-sm text-gray-500">
+            <div className="flex space-x-1">
+              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
               <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{
             animationDelay: '0.1s'
-          }} data-magicpath-id="11" data-magicpath-path="MessageList.tsx"></div>
+          }}></div>
               <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{
             animationDelay: '0.2s'
-          }} data-magicpath-id="12" data-magicpath-path="MessageList.tsx"></div>
+          }}></div>
             </div>
-            <span data-magicpath-id="13" data-magicpath-path="MessageList.tsx"><strong data-magicpath-id="14" data-magicpath-path="MessageList.tsx">{typingUser}</strong> is typing...</span>
+            <span><strong>{typingUser}</strong> is typing...</span>
           </div>}
       </div>
     </div>;

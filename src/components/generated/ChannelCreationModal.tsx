@@ -97,7 +97,7 @@ export const ChannelCreationModal = ({
     setErrors({});
     onClose();
   };
-  return <AnimatePresence data-magicpath-id="0" data-magicpath-path="ChannelCreationModal.tsx">
+  return <AnimatePresence>
       {isOpen && <>
           {/* Backdrop */}
           <motion.div initial={{
@@ -106,7 +106,7 @@ export const ChannelCreationModal = ({
         opacity: 1
       }} exit={{
         opacity: 0
-      }} className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={handleClose} data-magicpath-id="1" data-magicpath-path="ChannelCreationModal.tsx">
+      }} className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={handleClose}>
             {/* Modal */}
             <motion.div initial={{
           opacity: 0,
@@ -123,50 +123,50 @@ export const ChannelCreationModal = ({
         }} transition={{
           type: "spring",
           duration: 0.3
-        }} className="bg-white rounded-xl shadow-2xl w-full max-w-lg mx-auto" onClick={e => e.stopPropagation()} data-magicpath-id="2" data-magicpath-path="ChannelCreationModal.tsx">
+        }} className="bg-white rounded-xl shadow-2xl w-full max-w-lg mx-auto" onClick={e => e.stopPropagation()}>
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-gray-200" data-magicpath-id="3" data-magicpath-path="ChannelCreationModal.tsx">
-                <h2 className="text-xl font-semibold text-gray-900" data-magicpath-id="4" data-magicpath-path="ChannelCreationModal.tsx">
+              <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                <h2 className="text-xl font-semibold text-gray-900">
                   Create a channel
                 </h2>
-                <button onClick={handleClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors" data-magicpath-id="5" data-magicpath-path="ChannelCreationModal.tsx">
-                  <X className="w-5 h-5 text-gray-500" data-magicpath-id="6" data-magicpath-path="ChannelCreationModal.tsx" />
+                <button onClick={handleClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                  <X className="w-5 h-5 text-gray-500" />
                 </button>
               </div>
 
               {/* Form */}
-              <form onSubmit={handleSubmit} className="p-6 space-y-6" data-magicpath-id="7" data-magicpath-path="ChannelCreationModal.tsx">
+              <form onSubmit={handleSubmit} className="p-6 space-y-6">
                 {/* Channel Type Selection */}
-                <div className="space-y-3" data-magicpath-id="8" data-magicpath-path="ChannelCreationModal.tsx">
-                  <label className="block text-sm font-medium text-gray-700" data-magicpath-id="9" data-magicpath-path="ChannelCreationModal.tsx">
+                <div className="space-y-3">
+                  <label className="block text-sm font-medium text-gray-700">
                     Channel type
                   </label>
-                  <div className="space-y-2" data-magicpath-id="10" data-magicpath-path="ChannelCreationModal.tsx">
-                    <button type="button" onClick={() => setChannelType('public')} className={`w-full flex items-start space-x-3 p-4 rounded-lg border-2 transition-all ${channelType === 'public' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`} data-magicpath-id="11" data-magicpath-path="ChannelCreationModal.tsx">
-                      <div className={`p-1 rounded ${channelType === 'public' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`} data-magicpath-id="12" data-magicpath-path="ChannelCreationModal.tsx">
-                        <Hash className="w-4 h-4" data-magicpath-id="13" data-magicpath-path="ChannelCreationModal.tsx" />
+                  <div className="space-y-2">
+                    <button type="button" onClick={() => setChannelType('public')} className={`w-full flex items-start space-x-3 p-4 rounded-lg border-2 transition-all ${channelType === 'public' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                      <div className={`p-1 rounded ${channelType === 'public' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`}>
+                        <Hash className="w-4 h-4" />
                       </div>
-                      <div className="flex-1 text-left" data-magicpath-id="14" data-magicpath-path="ChannelCreationModal.tsx">
-                        <div className="flex items-center space-x-2" data-magicpath-id="15" data-magicpath-path="ChannelCreationModal.tsx">
-                          <span className="font-medium text-gray-900" data-magicpath-id="16" data-magicpath-path="ChannelCreationModal.tsx">Public</span>
-                          <Globe className="w-4 h-4 text-gray-400" data-magicpath-id="17" data-magicpath-path="ChannelCreationModal.tsx" />
+                      <div className="flex-1 text-left">
+                        <div className="flex items-center space-x-2">
+                          <span className="font-medium text-gray-900">Public</span>
+                          <Globe className="w-4 h-4 text-gray-400" />
                         </div>
-                        <p className="text-sm text-gray-600 mt-1" data-magicpath-id="18" data-magicpath-path="ChannelCreationModal.tsx">
+                        <p className="text-sm text-gray-600 mt-1">
                           Anyone in your workspace can join
                         </p>
                       </div>
                     </button>
 
-                    <button type="button" onClick={() => setChannelType('private')} className={`w-full flex items-start space-x-3 p-4 rounded-lg border-2 transition-all ${channelType === 'private' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`} data-magicpath-id="19" data-magicpath-path="ChannelCreationModal.tsx">
-                      <div className={`p-1 rounded ${channelType === 'private' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`} data-magicpath-id="20" data-magicpath-path="ChannelCreationModal.tsx">
-                        <Lock className="w-4 h-4" data-magicpath-id="21" data-magicpath-path="ChannelCreationModal.tsx" />
+                    <button type="button" onClick={() => setChannelType('private')} className={`w-full flex items-start space-x-3 p-4 rounded-lg border-2 transition-all ${channelType === 'private' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                      <div className={`p-1 rounded ${channelType === 'private' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`}>
+                        <Lock className="w-4 h-4" />
                       </div>
-                      <div className="flex-1 text-left" data-magicpath-id="22" data-magicpath-path="ChannelCreationModal.tsx">
-                        <div className="flex items-center space-x-2" data-magicpath-id="23" data-magicpath-path="ChannelCreationModal.tsx">
-                          <span className="font-medium text-gray-900" data-magicpath-id="24" data-magicpath-path="ChannelCreationModal.tsx">Private</span>
-                          <Users className="w-4 h-4 text-gray-400" data-magicpath-id="25" data-magicpath-path="ChannelCreationModal.tsx" />
+                      <div className="flex-1 text-left">
+                        <div className="flex items-center space-x-2">
+                          <span className="font-medium text-gray-900">Private</span>
+                          <Users className="w-4 h-4 text-gray-400" />
                         </div>
-                        <p className="text-sm text-gray-600 mt-1" data-magicpath-id="26" data-magicpath-path="ChannelCreationModal.tsx">
+                        <p className="text-sm text-gray-600 mt-1">
                           Only invited members can join
                         </p>
                       </div>
@@ -175,47 +175,47 @@ export const ChannelCreationModal = ({
                 </div>
 
                 {/* Channel Name */}
-                <div className="space-y-2" data-magicpath-id="27" data-magicpath-path="ChannelCreationModal.tsx">
-                  <label htmlFor="channel-name" className="block text-sm font-medium text-gray-700" data-magicpath-id="28" data-magicpath-path="ChannelCreationModal.tsx">
+                <div className="space-y-2">
+                  <label htmlFor="channel-name" className="block text-sm font-medium text-gray-700">
                     Channel name
                   </label>
-                  <div className="relative" data-magicpath-id="29" data-magicpath-path="ChannelCreationModal.tsx">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" data-magicpath-id="30" data-magicpath-path="ChannelCreationModal.tsx">
-                      {channelType === 'public' ? <Hash className="w-5 h-5 text-gray-400" data-magicpath-id="31" data-magicpath-path="ChannelCreationModal.tsx" /> : <Lock className="w-5 h-5 text-gray-400" data-magicpath-id="32" data-magicpath-path="ChannelCreationModal.tsx" />}
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      {channelType === 'public' ? <Hash className="w-5 h-5 text-gray-400" /> : <Lock className="w-5 h-5 text-gray-400" />}
                     </div>
-                    <input id="channel-name" type="text" value={channelName} onChange={e => handleNameChange(e.target.value)} placeholder="e.g. marketing-team" className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.name ? 'border-red-300' : 'border-gray-300'}`} maxLength={21} data-magicpath-id="33" data-magicpath-path="ChannelCreationModal.tsx" />
+                    <input id="channel-name" type="text" value={channelName} onChange={e => handleNameChange(e.target.value)} placeholder="e.g. marketing-team" className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${errors.name ? 'border-red-300' : 'border-gray-300'}`} maxLength={21} />
                   </div>
-                  {errors.name && <div className="flex items-center space-x-2 text-red-600 text-sm" data-magicpath-id="34" data-magicpath-path="ChannelCreationModal.tsx">
-                      <AlertCircle className="w-4 h-4" data-magicpath-id="35" data-magicpath-path="ChannelCreationModal.tsx" />
-                      <span data-magicpath-id="36" data-magicpath-path="ChannelCreationModal.tsx">{errors.name}</span>
+                  {errors.name && <div className="flex items-center space-x-2 text-red-600 text-sm">
+                      <AlertCircle className="w-4 h-4" />
+                      <span>{errors.name}</span>
                     </div>}
-                  <p className="text-xs text-gray-500" data-magicpath-id="37" data-magicpath-path="ChannelCreationModal.tsx">
+                  <p className="text-xs text-gray-500">
                     Names must be lowercase, without spaces or periods, and shorter than 22 characters.
                   </p>
                 </div>
 
                 {/* Description */}
-                <div className="space-y-2" data-magicpath-id="38" data-magicpath-path="ChannelCreationModal.tsx">
-                  <label htmlFor="description" className="block text-sm font-medium text-gray-700" data-magicpath-id="39" data-magicpath-path="ChannelCreationModal.tsx">
-                    Description <span className="text-gray-400" data-magicpath-id="40" data-magicpath-path="ChannelCreationModal.tsx">(optional)</span>
+                <div className="space-y-2">
+                  <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                    Description <span className="text-gray-400">(optional)</span>
                   </label>
-                  <textarea id="description" value={description} onChange={e => handleDescriptionChange(e.target.value)} placeholder="What's this channel about?" rows={3} className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none ${errors.description ? 'border-red-300' : 'border-gray-300'}`} maxLength={250} data-magicpath-id="41" data-magicpath-path="ChannelCreationModal.tsx" />
-                  {errors.description && <div className="flex items-center space-x-2 text-red-600 text-sm" data-magicpath-id="42" data-magicpath-path="ChannelCreationModal.tsx">
-                      <AlertCircle className="w-4 h-4" data-magicpath-id="43" data-magicpath-path="ChannelCreationModal.tsx" />
-                      <span data-magicpath-id="44" data-magicpath-path="ChannelCreationModal.tsx">{errors.description}</span>
+                  <textarea id="description" value={description} onChange={e => handleDescriptionChange(e.target.value)} placeholder="What's this channel about?" rows={3} className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none ${errors.description ? 'border-red-300' : 'border-gray-300'}`} maxLength={250} />
+                  {errors.description && <div className="flex items-center space-x-2 text-red-600 text-sm">
+                      <AlertCircle className="w-4 h-4" />
+                      <span>{errors.description}</span>
                     </div>}
-                  <div className="flex justify-between text-xs text-gray-500" data-magicpath-id="45" data-magicpath-path="ChannelCreationModal.tsx">
-                    <span data-magicpath-id="46" data-magicpath-path="ChannelCreationModal.tsx">Help others understand what this channel is for</span>
-                    <span data-magicpath-id="47" data-magicpath-path="ChannelCreationModal.tsx">{description.length}/250</span>
+                  <div className="flex justify-between text-xs text-gray-500">
+                    <span>Help others understand what this channel is for</span>
+                    <span>{description.length}/250</span>
                   </div>
                 </div>
 
                 {/* Actions */}
-                <div className="flex justify-end space-x-3 pt-4" data-magicpath-id="48" data-magicpath-path="ChannelCreationModal.tsx">
-                  <button type="button" onClick={handleClose} className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors" data-magicpath-id="49" data-magicpath-path="ChannelCreationModal.tsx">
+                <div className="flex justify-end space-x-3 pt-4">
+                  <button type="button" onClick={handleClose} className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
                     Cancel
                   </button>
-                  <button type="submit" disabled={!channelName.trim() || !!errors.name || !!errors.description} className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium" data-magicpath-id="50" data-magicpath-path="ChannelCreationModal.tsx">
+                  <button type="submit" disabled={!channelName.trim() || !!errors.name || !!errors.description} className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium">
                     Create Channel
                   </button>
                 </div>
