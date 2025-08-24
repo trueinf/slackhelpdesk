@@ -30,19 +30,19 @@ const MOCK_ALL_CHANNELS: Channel[] = [{
   lastActivity: new Date(Date.now() - 3600000),
   creator: 'admin'
 }, {
-  id: 'random',
-  name: 'random',
+  id: 'announcements',
+  name: 'announcements',
   type: 'public',
-  description: 'Random conversations and fun stuff',
+  description: 'Important company announcements and news',
   memberCount: 892,
   isJoined: true,
   lastActivity: new Date(Date.now() - 7200000),
   creator: 'admin'
 }, {
-  id: 'announcements',
-  name: 'announcements',
+  id: 'random',
+  name: 'random',
   type: 'public',
-  description: 'Important company announcements and news',
+  description: 'Random conversations and fun stuff',
   memberCount: 1500,
   isJoined: false,
   lastActivity: new Date(Date.now() - 86400000),

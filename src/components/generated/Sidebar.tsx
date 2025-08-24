@@ -42,8 +42,8 @@ const MOCK_CHANNELS: Channel[] = [{
   type: 'public',
   isActive: true
 }, {
-  id: 'random',
-  name: 'random',
+  id: 'announcements',
+  name: 'announcements',
   type: 'public',
   unreadCount: 3
 }, {
@@ -81,6 +81,12 @@ const MOCK_DMS: DirectMessage[] = [{
   username: 'Alex Thompson',
   avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
   status: 'offline'
+}, {
+  id: 'dm5',
+  username: 'Helpdesk Agent',
+  avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face',
+  status: 'online',
+  unreadCount: 1
 }];
 export const Sidebar = ({
   workspaceName,

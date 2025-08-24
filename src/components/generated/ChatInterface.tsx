@@ -28,7 +28,9 @@ interface Message {
     thumbnail?: string;
   }>;
 }
-const MOCK_MESSAGES: Message[] = [{
+// Channel-specific message collections
+const CHANNEL_MESSAGES: Record<string, Message[]> = {
+  general: [{
   id: '1',
   userId: 'user1',
   username: 'Sarah Chen',
@@ -85,15 +87,252 @@ const MOCK_MESSAGES: Message[] = [{
     count: 4,
     users: ['user1', 'user2', 'user3', 'current-user']
   }]
-}];
+  }],
+
+  announcements: [{
+    id: 'ann1',
+    userId: 'admin',
+    username: 'CEO - Alex Johnson',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+    content: '🎉 Exciting news! We\'ve just secured our Series B funding round of $50M! This will allow us to expand our team and accelerate product development.',
+    timestamp: new Date(Date.now() - 86400000),
+    reactions: [{
+      emoji: '🎉',
+      count: 47,
+      users: ['user1', 'user2', 'user3', 'user4']
+    }, {
+      emoji: '🚀',
+      count: 23,
+      users: ['user1', 'user3']
+    }]
+  }, {
+    id: 'ann2',
+    userId: 'hr',
+    username: 'HR - Lisa Wang',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face',
+    content: 'Reminder: Our quarterly all-hands meeting is scheduled for Friday at 2 PM. We\'ll be discussing Q4 goals and celebrating our recent achievements!',
+    timestamp: new Date(Date.now() - 172800000),
+    reactions: [{
+      emoji: '📅',
+      count: 12,
+      users: ['user1', 'user2']
+    }]
+  }, {
+    id: 'ann3',
+    userId: 'admin',
+    username: 'CTO - Sarah Chen',
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+    content: 'Security update: Please make sure to update your passwords and enable 2FA by end of this week. IT will be sending detailed instructions shortly.',
+    timestamp: new Date(Date.now() - 259200000),
+    reactions: [{
+      emoji: '🔒',
+      count: 8,
+      users: ['user2', 'user3']
+    }]
+  }],
+
+  'dev-team': [{
+    id: 'dev1',
+    userId: 'tech-lead',
+    username: 'Tech Lead - Mike Johnson',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
+    content: 'Morning team! Code review for the new authentication system is ready. Please check PR #247 when you have a moment.',
+    timestamp: new Date(Date.now() - 7200000),
+    reactions: [{
+      emoji: '👀',
+      count: 5,
+      users: ['user1', 'user2', 'user3']
+    }]
+  }, {
+    id: 'dev2',
+    userId: 'user1',
+    username: 'Sarah Chen',
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+    content: 'The API performance improvements are looking great! Response times are down 40% across the board.',
+    timestamp: new Date(Date.now() - 10800000),
+    reactions: [{
+      emoji: '⚡',
+      count: 3,
+      users: ['user2', 'user3']
+    }]
+  }, {
+    id: 'dev3',
+    userId: 'user4',
+    username: 'David Kim',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
+    content: 'Deployed the hotfix for the login issue. All systems are stable now. 🛠️',
+    timestamp: new Date(Date.now() - 14400000),
+    reactions: [{
+      emoji: '✅',
+      count: 4,
+      users: ['user1', 'user2', 'user3']
+    }]
+  }],
+
+  design: [{
+    id: 'des1',
+    userId: 'designer',
+    username: 'Design Lead - Emily Rodriguez',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face',
+    content: 'New mockups for the dashboard redesign are ready! Check out the improved user flow and let me know your thoughts.',
+    timestamp: new Date(Date.now() - 5400000),
+    reactions: [{
+      emoji: '🎨',
+      count: 6,
+      users: ['user1', 'user2', 'user3']
+    }],
+    files: [{
+      id: 'design1',
+      name: 'dashboard-v2-mockups.fig',
+      size: 15728640,
+      type: 'application/figma',
+      url: '#',
+      thumbnail: 'https://via.placeholder.com/60x80/4f46e5/ffffff?text=FIG'
+    }]
+  }, {
+    id: 'des2',
+    userId: 'user2',
+    username: 'Mike Johnson',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
+    content: 'Love the new color palette! The accessibility improvements make a huge difference. Great work Emily! 🌈',
+    timestamp: new Date(Date.now() - 9000000),
+    reactions: [{
+      emoji: '💙',
+      count: 4,
+      users: ['user1', 'user3', 'designer']
+    }]
+  }],
+
+  marketing: [{
+    id: 'mrk1',
+    userId: 'marketing-head',
+    username: 'Marketing - Alex Thompson',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+    content: 'Q4 campaign results are in! We exceeded our targets by 25%. The new social media strategy is really paying off! 📈',
+    timestamp: new Date(Date.now() - 3600000),
+    reactions: [{
+      emoji: '🎯',
+      count: 7,
+      users: ['user1', 'user2', 'user3']
+    }]
+  }, {
+    id: 'mrk2',
+    userId: 'user3',
+    username: 'Emily Rodriguez',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face',
+    content: 'The product launch event planning is moving along nicely. Venue is booked and we have 200+ RSVPs already! 🎪',
+    timestamp: new Date(Date.now() - 7200000),
+    reactions: [{
+      emoji: '🎉',
+      count: 5,
+      users: ['user1', 'user2', 'marketing-head']
+    }]
+  }]
+};
+
+// DM-specific message collections
+const DM_MESSAGES: Record<string, Message[]> = {
+  dm1: [{
+    id: 'dm1-1',
+    userId: 'user1',
+    username: 'Sarah Chen',
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+    content: 'Hey! Thanks for your help with the design review yesterday. Really appreciated your feedback!',
+    timestamp: new Date(Date.now() - 7200000),
+    reactions: [{
+      emoji: '😊',
+      count: 1,
+      users: ['current-user']
+    }]
+  }, {
+    id: 'dm1-2',
+    userId: 'current-user',
+    username: 'You',
+    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=32&h=32&fit=crop&crop=face',
+    content: 'No problem! The new layout looks great. Let me know if you need any other input.',
+    timestamp: new Date(Date.now() - 3600000),
+    reactions: []
+  }],
+
+  dm2: [{
+    id: 'dm2-1',
+    userId: 'user2',
+    username: 'Mike Johnson',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
+    content: 'Can you look at the API integration when you get a chance? Having some issues with the authentication flow.',
+    timestamp: new Date(Date.now() - 14400000),
+    reactions: []
+  }],
+
+  dm3: [{
+    id: 'dm3-1',
+    userId: 'user3',
+    username: 'Emily Rodriguez',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face',
+    content: 'Quick question about the user research findings - do you have a moment to chat?',
+    timestamp: new Date(Date.now() - 1800000),
+    reactions: []
+  }],
+
+  dm4: [{
+    id: 'dm4-1',
+    userId: 'user4',
+    username: 'Alex Thompson',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+    content: 'The quarterly presentation went really well! Thanks for all your help preparing it.',
+    timestamp: new Date(Date.now() - 86400000),
+    reactions: [{
+      emoji: '🎉',
+      count: 1,
+      users: ['current-user']
+    }]
+  }],
+
+  dm5: [{
+    id: 'help1',
+    userId: 'helpdesk',
+    username: 'Helpdesk Agent',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face',
+    content: 'Hi there! 👋 I\'m here to help you with any technical issues or questions you might have. How can I assist you today?',
+    timestamp: new Date(Date.now() - 3600000),
+    reactions: []
+  }, {
+    id: 'help2',
+    userId: 'helpdesk',
+    username: 'Helpdesk Agent',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face',
+    content: 'I can help with:\n• Password resets\n• Software installations\n• Network connectivity issues\n• Account permissions\n• Hardware troubleshooting\n\nJust let me know what you need! 🔧',
+    timestamp: new Date(Date.now() - 3300000),
+    reactions: [{
+      emoji: '👍',
+      count: 1,
+      users: ['current-user']
+    }]
+  }, {
+    id: 'help3',
+    userId: 'helpdesk',
+    username: 'Helpdesk Agent',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face',
+    content: '🎤 **NEW:** You can now use our voice assistant! Look for the microphone icon below to start a voice conversation. It\'s perfect for hands-free support when you\'re working on something else.',
+    timestamp: new Date(Date.now() - 1800000),
+    reactions: [{
+      emoji: '🔥',
+      count: 1,
+      users: ['current-user']
+    }]
+  }]
+};
+
 export const ChatInterface = () => {
-  const [messages, setMessages] = useState<Message[]>(MOCK_MESSAGES);
+  const [messages, setMessages] = useState<Message[]>(CHANNEL_MESSAGES.general);
   const [isTyping, setIsTyping] = useState(false);
   const [typingUser, setTypingUser] = useState('');
   const [currentChannel, setCurrentChannel] = useState('general');
   const [currentDM, setCurrentDM] = useState<string | null>(null);
   const [threadPanelOpen, setThreadPanelOpen] = useState(false);
   const [selectedThreadMessage, setSelectedThreadMessage] = useState<Message | null>(null);
+  const [transcriptWs, setTranscriptWs] = useState<WebSocket | null>(null);
+  const [isTranscriptActive, setIsTranscriptActive] = useState(false);
   const [channels, setChannels] = useState([{
     id: 'general',
     name: 'general',
@@ -101,11 +340,11 @@ export const ChatInterface = () => {
     memberCount: 1247,
     topic: 'Team discussions and updates'
   }, {
-    id: 'random',
-    name: 'random',
+    id: 'announcements',
+    name: 'announcements',
     type: 'public' as const,
     memberCount: 892,
-    topic: 'Random conversations and fun stuff'
+    topic: 'Important company announcements and news'
   }, {
     id: 'dev-team',
     name: 'dev-team',
@@ -130,6 +369,186 @@ export const ChatInterface = () => {
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=32&h=32&fit=crop&crop=face',
     status: 'online' as const
   };
+
+  // Transcript capture functionality
+  const initializeTranscriptCapture = async () => {
+    const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
+    if (!apiKey) {
+      console.warn('ElevenLabs API key not found. Transcript capture disabled.');
+      return;
+    }
+
+    // Debug API key (show first/last 4 characters for security)
+    console.log('API Key loaded:', apiKey ? `${apiKey.slice(0, 4)}...${apiKey.slice(-4)}` : 'NOT_FOUND');
+
+    // Test API key with a simple request first
+    try {
+      console.log('Testing API key with user info request...');
+      const testResponse = await fetch('https://api.elevenlabs.io/v1/user', {
+        method: 'GET',
+        headers: {
+          'xi-api-key': apiKey
+        }
+      });
+      
+      if (testResponse.ok) {
+        const userInfo = await testResponse.json();
+        console.log('API key valid - User:', userInfo.email || 'Unknown');
+      } else {
+        console.error('API key validation failed:', testResponse.status, await testResponse.text());
+        setIsTranscriptActive(false);
+        return;
+      }
+    } catch (error) {
+      console.error('API key validation error:', error);
+      setIsTranscriptActive(false);
+      return;
+    }
+
+    try {
+      // First, get a signed URL for the WebSocket connection
+      console.log('Getting signed URL for transcript capture...');
+      
+      const url = `https://api.elevenlabs.io/v1/convai/conversation/get-signed-url?agent_id=agent_0701k38wmdtter699jn3f9vx3a2d`;
+      console.log('Request URL:', url);
+      console.log('Request headers:', { 'xi-api-key': `${apiKey.slice(0, 4)}...${apiKey.slice(-4)}` });
+      
+      const signedUrlResponse = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'xi-api-key': apiKey,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log('Response status:', signedUrlResponse.status);
+      console.log('Response headers:', Object.fromEntries(signedUrlResponse.headers.entries()));
+
+      if (!signedUrlResponse.ok) {
+        const errorText = await signedUrlResponse.text();
+        console.error('Error response body:', errorText);
+        throw new Error(`Failed to get signed URL: ${signedUrlResponse.status} ${signedUrlResponse.statusText}. Body: ${errorText}`);
+      }
+
+      const { signed_url } = await signedUrlResponse.json();
+      console.log('Signed URL obtained, connecting to WebSocket...');
+
+      // Create WebSocket connection using signed URL
+      const ws = new WebSocket(signed_url);
+      
+      ws.onopen = () => {
+        console.log('Transcript capture WebSocket connected');
+        setIsTranscriptActive(true);
+      };
+
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          console.log('Received transcript message:', data);
+          handleTranscriptMessage(data);
+        } catch (error) {
+          console.error('Error parsing transcript message:', error);
+        }
+      };
+
+      ws.onerror = (error) => {
+        console.error('Transcript WebSocket error:', error);
+        setIsTranscriptActive(false);
+      };
+
+      ws.onclose = (event) => {
+        console.log('Transcript WebSocket closed', event.code, event.reason);
+        setIsTranscriptActive(false);
+        setTranscriptWs(null);
+      };
+
+      setTranscriptWs(ws);
+    } catch (error) {
+      console.error('Failed to initialize transcript capture:', error);
+      setIsTranscriptActive(false);
+    }
+  };
+
+  const handleTranscriptMessage = (data: any) => {
+    console.log('Processing transcript message type:', data.type, data);
+    
+    // Handle different types of transcript messages
+    if (data.type === 'conversation_initiation_metadata') {
+      console.log('Transcript conversation started');
+    } else if (data.type === 'audio' && data.audio_event) {
+      // This is a bot response with audio
+      console.log('Audio event received:', data.audio_event);
+      if (data.audio_event.transcript) {
+        addTranscriptToChat(data.audio_event.transcript, 'assistant');
+      }
+    } else if (data.type === 'user_transcript' || data.type === 'user_message') {
+      // User input transcript
+      console.log('User transcript received:', data.transcript || data.message);
+      if (data.transcript || data.message) {
+        addTranscriptToChat(data.transcript || data.message, 'user');
+      }
+    } else if (data.type === 'agent_response' && data.transcript) {
+      // Agent response transcript
+      console.log('Agent response received:', data.transcript);
+      addTranscriptToChat(data.transcript, 'assistant');
+    } else if (data.type === 'user_input_audio') {
+      // User is speaking
+      console.log('User input audio detected');
+    } else if (data.type === 'agent_output_audio') {
+      // Agent is responding with audio
+      console.log('Agent output audio detected');
+    } else if (data.type === 'conversation_end') {
+      // Conversation ended
+      console.log('Conversation ended');
+    } else {
+      console.log('Unknown message type received:', data.type, data);
+    }
+  };
+
+  const addTranscriptToChat = (transcript: string, speaker: 'user' | 'assistant') => {
+    const transcriptMessage: Message = {
+      id: `transcript-${Date.now()}-${Math.random()}`,
+      userId: speaker === 'user' ? 'current-user' : 'helpdesk-voice',
+      username: speaker === 'user' ? 'You (Voice)' : 'Helpdesk Agent (Voice)',
+      avatar: speaker === 'user' 
+        ? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=32&h=32&fit=crop&crop=face'
+        : 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face',
+      content: `🎤 ${transcript}`,
+      timestamp: new Date(),
+      reactions: []
+    };
+
+    setMessages(prev => [...prev, transcriptMessage]);
+    
+    // Also save to DM messages
+    if (currentDM === 'dm5' && DM_MESSAGES['dm5']) {
+      DM_MESSAGES['dm5'].push(transcriptMessage);
+    }
+  };
+
+  const closeTranscriptCapture = () => {
+    if (transcriptWs) {
+      transcriptWs.close();
+      setTranscriptWs(null);
+      setIsTranscriptActive(false);
+    }
+  };
+
+  // Effect to handle transcript capture when entering/leaving helpdesk DM
+  useEffect(() => {
+    if (currentDM === 'dm5') {
+      // Entered helpdesk DM - start transcript capture
+      initializeTranscriptCapture();
+    } else {
+      // Left helpdesk DM - stop transcript capture
+      closeTranscriptCapture();
+    }
+
+    // Cleanup on unmount
+    return () => {
+      closeTranscriptCapture();
+    };
+  }, [currentDM]);
   const handleSendMessage = (content: string, files?: File[]) => {
     const newMessage: Message = {
       id: Date.now().toString(),
@@ -148,6 +567,13 @@ export const ChatInterface = () => {
       }))
     };
     setMessages(prev => [...prev, newMessage]);
+    
+    // Update the channel or DM messages collection
+    if (currentChannel && CHANNEL_MESSAGES[currentChannel]) {
+      CHANNEL_MESSAGES[currentChannel].push(newMessage);
+    } else if (currentDM && DM_MESSAGES[currentDM]) {
+      DM_MESSAGES[currentDM].push(newMessage);
+    }
 
     // Simulate typing indicator for response
     setIsTyping(true);
@@ -163,6 +589,14 @@ export const ChatInterface = () => {
         reactions: []
       };
       setMessages(prev => [...prev, botResponse]);
+      
+      // Update the channel or DM messages collection
+      if (currentChannel && CHANNEL_MESSAGES[currentChannel]) {
+        CHANNEL_MESSAGES[currentChannel].push(botResponse);
+      } else if (currentDM && DM_MESSAGES[currentDM]) {
+        DM_MESSAGES[currentDM].push(botResponse);
+      }
+      
       setIsTyping(false);
       setTypingUser('');
     }, 2000);
@@ -212,11 +646,15 @@ export const ChatInterface = () => {
     setCurrentChannel(channelId);
     setCurrentDM(null);
     setThreadPanelOpen(false);
+    // Load channel-specific messages
+    setMessages(CHANNEL_MESSAGES[channelId] || []);
   };
   const handleDMSelect = (dmId: string) => {
     setCurrentDM(dmId);
     setCurrentChannel('');
     setThreadPanelOpen(false);
+    // Load DM-specific messages
+    setMessages(DM_MESSAGES[dmId] || []);
   };
   const handleOpenThread = (message: Message) => {
     setSelectedThreadMessage(message);
@@ -246,8 +684,8 @@ export const ChatInterface = () => {
     setCurrentDM(null);
     setThreadPanelOpen(false);
 
-    // Clear messages for the new channel (in a real app, this would fetch channel messages)
-    setMessages([]);
+    // Load messages for the new channel (in a real app, this would fetch channel messages)
+    setMessages(CHANNEL_MESSAGES[newChannel.id] || []);
   };
   const handleChannelJoin = (channelId: string) => {
     // In a real app, this would make an API call to join the channel
@@ -292,10 +730,20 @@ export const ChatInterface = () => {
   };
   const getChannelInfo = () => {
     if (currentDM) {
+      // Get the DM user name
+      const dmUserMap: Record<string, {name: string, topic: string}> = {
+        dm1: { name: 'Sarah Chen', topic: 'Direct message with Sarah Chen' },
+        dm2: { name: 'Mike Johnson', topic: 'Direct message with Mike Johnson' },
+        dm3: { name: 'Emily Rodriguez', topic: 'Direct message with Emily Rodriguez' },
+        dm4: { name: 'Alex Thompson', topic: 'Direct message with Alex Thompson' },
+        dm5: { name: 'Helpdesk Agent', topic: 'IT Support and Technical Assistance' }
+      };
+      
+      const dmInfo = dmUserMap[currentDM] || { name: 'Direct Message', topic: 'Private conversation' };
       return {
-        name: 'Direct Message',
+        name: dmInfo.name,
         memberCount: 2,
-        topic: 'Private conversation'
+        topic: dmInfo.topic
       };
     }
     const channel = channels.find(c => c.id === currentChannel);
@@ -313,6 +761,41 @@ export const ChatInterface = () => {
         <MessageList messages={messages} onAddReaction={handleAddReaction} onOpenThread={handleOpenThread} isTyping={isTyping} typingUser={typingUser} />
         
         <MessageInput onSendMessage={handleSendMessage} placeholder={`Message #${channelInfo.name}`} />
+        
+        {/* ConvAI Widget for Helpdesk */}
+        {currentDM === 'dm5' && (
+          <div className="p-4 border-t border-gray-200 bg-blue-50">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Voice Assistant Available</h3>
+                  <p className="text-sm text-gray-600">Click the microphone to start a voice conversation with our AI assistant</p>
+                </div>
+              </div>
+              
+              {/* Transcript Status Indicator */}
+              <div className="flex items-center space-x-2">
+                <div className={`w-2 h-2 rounded-full ${isTranscriptActive ? 'bg-green-500' : 'bg-gray-400'}`}></div>
+                <span className="text-xs text-gray-600">
+                  {isTranscriptActive ? 'Transcript Active' : 'Transcript Offline'}
+                </span>
+              </div>
+            </div>
+            
+            {!import.meta.env.VITE_ELEVENLABS_API_KEY && (
+              <div className="mb-3 p-2 bg-yellow-100 border border-yellow-300 rounded text-sm text-yellow-800">
+                ⚠️ Transcript capture disabled: API key not configured
+              </div>
+            )}
+            
+            <elevenlabs-convai agent-id="agent_0701k38wmdtter699jn3f9vx3a2d"></elevenlabs-convai>
+          </div>
+        )}
       </div>
 
       {/* Thread Panel */}
