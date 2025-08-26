@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Container, Theme } from './settings/types';
 import { ChatInterface } from './components/generated/ChatInterface';
 
@@ -20,6 +20,19 @@ function App() {
   const generatedComponent = useMemo(() => {
     // THIS IS WHERE THE TOP LEVEL GENRATED COMPONENT WILL BE RETURNED!
     return <ChatInterface />; // %EXPORT_STATEMENT%
+  }, []);
+
+  // Global shortcut for KB palette: Cmd/Ctrl+K
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        const ev = new CustomEvent('open-kb-palette');
+        window.dispatchEvent(ev);
+      }
+    };
+    window.addEventListener('keydown', handler as any);
+    return () => window.removeEventListener('keydown', handler as any);
   }, []);
 
   if (container === 'centered') {

@@ -27,15 +27,23 @@ import App from './App.tsx';
 import { RootDnd } from './dnd-kit/RootDnd.tsx';
 import { DragStateProvider } from './dnd-kit/DragStateContext.tsx';
 import { MoveProvider } from './dnd-kit/MoveContext.tsx';
+import { KBArticlePage } from './components/kb/KBArticlePage.tsx';
+
+const params = new URLSearchParams(window.location.search);
+const showKB = !!params.get('kb');
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <MoveProvider>
-      <DragStateProvider>
-        <RootDnd>
-          <App />
-        </RootDnd>
-      </DragStateProvider>
-    </MoveProvider>
+    {showKB ? (
+      <KBArticlePage />
+    ) : (
+      <MoveProvider>
+        <DragStateProvider>
+          <RootDnd>
+            <App />
+          </RootDnd>
+        </DragStateProvider>
+      </MoveProvider>
+    )}
   </StrictMode>
 );

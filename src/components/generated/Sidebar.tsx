@@ -5,6 +5,7 @@ import { Hash, Lock, Users, Plus, ChevronDown, ChevronRight, Circle, MessageCirc
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChannelCreationModal } from './ChannelCreationModal';
 import { ChannelBrowser } from './ChannelBrowser';
+import { BookOpen } from 'lucide-react';
 interface Channel {
   id: string;
   name: string;
@@ -35,6 +36,7 @@ interface SidebarProps {
     type: 'public' | 'private';
   }) => void;
   onChannelJoin?: (channelId: string) => void;
+  onOpenKB?: () => void;
 }
 const MOCK_CHANNELS: Channel[] = [{
   id: 'general',
@@ -63,7 +65,7 @@ const MOCK_CHANNELS: Channel[] = [{
 const MOCK_DMS: DirectMessage[] = [{
   id: 'dm1',
   username: 'Sarah Chen',
-  avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+  avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=32&h=32&fit=crop&crop=face',
   status: 'online',
   unreadCount: 2
 }, {
@@ -87,6 +89,11 @@ const MOCK_DMS: DirectMessage[] = [{
   avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face',
   status: 'online',
   unreadCount: 1
+}, {
+  id: 'dm6',
+  username: 'IT-Helpdesk',
+  avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face',
+  status: 'online'
 }];
 export const Sidebar = ({
   workspaceName,
@@ -94,7 +101,8 @@ export const Sidebar = ({
   onChannelSelect,
   onDMSelect,
   onChannelCreate,
-  onChannelJoin
+  onChannelJoin,
+  onOpenKB
 }: SidebarProps) => {
   const [channelsExpanded, setChannelsExpanded] = useState(true);
   const [dmsExpanded, setDmsExpanded] = useState(true);
@@ -180,6 +188,10 @@ export const Sidebar = ({
           <button onClick={() => setShowChannelBrowser(true)} className="w-full flex items-center space-x-3 px-3 py-2 text-sm hover:bg-slack-hover rounded transition-colors">
             <Globe className="w-4 h-4" />
             <span>Browse channels</span>
+          </button>
+          <button onClick={onOpenKB} className="w-full flex items-center space-x-3 px-3 py-2 text-sm hover:bg-slack-hover rounded transition-colors">
+            <BookOpen className="w-4 h-4" />
+            <span>Knowledge Base</span>
           </button>
         </div>
 
