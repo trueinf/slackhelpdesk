@@ -942,6 +942,7 @@ export const ChatInterface = () => {
               </div>
             )}
             
+            {/* @ts-ignore - custom web component provided by external script */}
             <elevenlabs-convai agent-id="agent_0701k38wmdtter699jn3f9vx3a2d"></elevenlabs-convai>
           </div>
         )}
