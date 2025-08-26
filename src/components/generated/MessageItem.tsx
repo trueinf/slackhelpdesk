@@ -61,7 +61,19 @@ export const MessageItem = ({
     });
   };
   const renderMessageContent = (content: string) => {
-    const parts = content.split(/(\*[^*]+\*|_[^_]+_|`[^`]+`|https?:\/\/[^\s]+)/g);
+    // Strip language identifiers from fenced code blocks like ```python, ```bash, etc.
+    const codeFenceNormalized = content.replace(/```[a-zA-Z0-9_-]+/g, '```');
+    // Remove timestamp header lines like "[9:47 AM] ..." or "[9:47:01 - 9:47:02] ..."
+    // Remove leading "slack<Name>:" prefixes from lines
+    const cleaned = codeFenceNormalized
+      .split('\n')
+      .map(line => {
+        if (/^\s*\[[^\]]+\]/.test(line)) return '';
+        return line.replace(/^\s*slack[^:]{1,80}:\s*/i, '');
+      })
+      .filter(l => l !== '')
+      .join('\n');
+    const parts = cleaned.split(/(\*[^*]+\*|_[^_]+_|`[^`]+`|https?:\/\/[^\s]+)/g);
     return parts.map((part, index) => {
       if (part.startsWith('*') && part.endsWith('*')) {
         return <strong key={index} className="font-semibold">{part.slice(1, -1)}</strong>;

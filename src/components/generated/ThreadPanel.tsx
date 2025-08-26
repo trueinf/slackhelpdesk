@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import { X, Hash, Users } from 'lucide-react';
+import { X, Hash, Users, BookOpen } from 'lucide-react';
+import { KB_ARTICLES } from '../../kb/mock-data';
+import { relatedKB } from '../../kb/search';
+import { KBCard } from '../kb/KBCard';
 import { MessageItem } from './MessageItem';
 import { MessageInput } from './MessageInput';
 interface Message {
@@ -50,7 +53,7 @@ const MOCK_THREAD_MESSAGES: Message[] = [{
   id: 'thread2',
   userId: 'user1',
   username: 'Sarah Chen',
-  avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+  avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=32&h=32&fit=crop&crop=face',
   content: 'Thanks! I spent a lot of time getting the gradients just right.',
   timestamp: new Date(Date.now() - 900000),
   reactions: []
@@ -106,6 +109,20 @@ export const ThreadPanel = ({
       <div className="flex-1 overflow-y-auto">
         <div className="p-4 space-y-4">
           {threadMessages.map((message, index) => <MessageItem key={message.id} message={message} onAddReaction={onAddReaction} showAvatar={index === 0 || threadMessages[index - 1].userId !== message.userId} />)}
+        </div>
+      </div>
+
+      {/* Related Knowledge */}
+      <div className="border-t border-gray-200">
+        <div className="p-3">
+          <div className="flex items-center gap-2 text-sm text-gray-700 font-medium mb-2">
+            <BookOpen className="w-4 h-4" /> <span>Related knowledge</span>
+          </div>
+          <div className="space-y-2 max-h-40 overflow-y-auto">
+            {relatedKB(KB_ARTICLES, parentMessage.content, [], 3).map(a => (
+              <KBCard key={a.id} article={a} />
+            ))}
+          </div>
         </div>
       </div>
 
