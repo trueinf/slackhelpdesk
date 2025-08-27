@@ -969,7 +969,7 @@ export const ChatInterface = () => {
   const channelInfo = getChannelInfo();
   return <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
-      <Sidebar workspaceName="Company" currentUser={currentUser} onChannelSelect={handleChannelSelect} onDMSelect={handleDMSelect} onChannelCreate={handleChannelCreate} onChannelJoin={handleChannelJoin} onOpenKB={() => setShowKB(true)} currentChannel={currentChannel} currentDM={currentDM} />
+      <Sidebar workspaceName="Company" currentUser={currentUser} onChannelSelect={handleChannelSelect} onDMSelect={handleDMSelect} onChannelCreate={handleChannelCreate} onChannelJoin={handleChannelJoin} onOpenKB={() => setShowKB(true)} currentChannel={currentChannel || undefined} currentDM={currentDM || undefined} />
       
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col">
@@ -1021,9 +1021,9 @@ export const ChatInterface = () => {
               </div>
             </div>
             
-
             
-            <elevenlabs-convai agent-id="agent_0701k38wmdtter699jn3f9vx3a2d"></elevenlabs-convai>
+            
+            {/* <elevenlabs-convai agent-id="agent_0701k38wmdtter699jn3f9vx3a2d"></elevenlabs-convai> */}
           </div>
         )}
       </div>
