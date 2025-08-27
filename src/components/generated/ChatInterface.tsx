@@ -292,159 +292,32 @@ const DM_MESSAGES: Record<string, Message[]> = {
 
   dm5: [{
     id: 'help1',
-    userId: 'helpdesk',
-    username: 'Helpdesk Agent',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face',
-    content: 'Hi there! 👋 I\'m here to help you with any technical issues or questions you might have. How can I assist you today?',
+    userId: 'it-bot',
+    username: 'IT Bot',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+    content: 'Hi there! 👋 I\'m your AI-powered IT support assistant. I can help you with:\n\n• 🔑 Password resets & account access\n• 💾 Software installations & app provisioning\n• 🌐 Network connectivity issues\n• 👤 Account permissions & Okta apps\n• 🖥️ Hardware troubleshooting\n• 📱 Mobile device setup\n\n**Just describe your issue and I\'ll get started right away!** \n\nFor urgent matters, type "urgent" and I\'ll escalate to a human agent immediately.',
     timestamp: new Date(Date.now() - 3600000),
-    reactions: []
-  }, {
-    id: 'help2',
-    userId: 'helpdesk',
-    username: 'Helpdesk Agent',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face',
-    content: 'I can help with:\n• Password resets\n• Software installations\n• Network connectivity issues\n• Account permissions\n• Hardware troubleshooting\n\nJust let me know what you need! 🔧',
-    timestamp: new Date(Date.now() - 3300000),
     reactions: [{
       emoji: '👍',
       count: 1,
       users: ['current-user']
     }]
-  }, {
-    id: 'help3',
-    userId: 'helpdesk',
-    username: 'Helpdesk Agent',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face',
-    content: '🎤 **NEW:** You can now use our voice assistant! Look for the microphone icon below to start a voice conversation. It\'s perfect for hands-free support when you\'re working on something else.',
-    timestamp: new Date(Date.now() - 1800000),
+  }],
+
+  dm6: [{
+    id: 'help-it-1',
+    userId: 'it-bot',
+    username: 'IT Bot',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+    content: 'Hi there! 👋 I\'m your AI-powered IT support assistant. I can help you with:\n\n• 🔑 Password resets & account access\n• 💾 Software installations & app provisioning\n• 🌐 Network connectivity issues\n• 👤 Account permissions & Okta apps\n• 🖥️ Hardware troubleshooting\n• 📱 Mobile device setup\n\n**Just describe your issue and I\'ll get started right away!** \n\nFor urgent matters, type "urgent" and I\'ll escalate to a human agent immediately.',
+    timestamp: new Date(Date.now() - 3600000),
     reactions: [{
-      emoji: '🔥',
+      emoji: '👍',
       count: 1,
       users: ['current-user']
     }]
   }]
-  ,
-  dm6: [{
-    id: 'ith-1',
-    userId: 'user1',
-    username: 'Sarah Chen',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47 AM] Sarah's Initial Message\nslackSarah Chen: Hey team, I can't see Figma in my Okta apps. My design team started using it last week and I need access for our campaign reviews. Can someone help? 🙏",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10),
-    reactions: []
-  }, {
-    id: 'ith-2',
-    userId: 'it-bot',
-    username: 'IT Bot',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:01 AM] IT Bot Response\nslackIT Bot: Hi @Sarah Chen! 👋 I see you're missing the Figma tile in Okta. Let me check this for you right away.\n\n🔍 Checking your current access...",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 1000),
-    reactions: []
-  }, {
-    id: 'ith-3',
-    userId: 'system',
-    username: 'System',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
-    content: "🤖 BEHIND THE SCENES - AGENT ORCHESTRATION\n[9:47:01 - 9:47:02] MASTER ORCHESTRATOR ACTIVATION\n```python\n{\n    \"timestamp\": \"9:47:01\",\n    \"trigger\": \"Slack webhook from #it-help\",\n    \"raw_message\": \"I can't see Figma in my Okta apps...\",\n    \"user\": \"sarah.chen@company.com\",\n    \"channel\": \"it-help\",\n    \"thread_ts\": \"1234567890.123456\"\n}\n```\n\n# Master Orchestrator routes to Knowledge & Learning Domain first\n[9:47:02 - 9:47:03] KNOWLEDGE & LEARNING DOMAIN\nKnowledge Capture Sub-Agent\n```python\ncapture_context = {\n    \"user_message\": \"can't see Figma in my Okta apps\",\n    \"extracted_intent\": \"missing_okta_tile\",\n    \"application\": \"Figma\",\n    \"platform\": \"Okta\",\n    \"channel\": \"Slack\",\n    \"historical_patterns\": [\n        \"Similar to 847 previous 'missing tile' requests\",\n        \"Figma requests increased 300% this month\"\n    ]\n}\n```\nPattern Recognition Sub-Agent\n```python\npattern_analysis = {\n    \"pattern_match\": \"OKTA_TILE_VISIBILITY_ISSUE\",\n    \"confidence\": 0.94,\n    \"similar_tickets\": 847,\n    \"resolution_success_rate\": 0.92,\n    \"avg_time_to_resolve\": \"3.2 minutes\",\n    \"recommended_flow\": \"AUTOMATED_PROVISIONING\"\n}\n```",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 2000),
-    reactions: []
-  }, {
-    id: 'ith-4',
-    userId: 'system',
-    username: 'System',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:03 - 9:47:04] NLP PARSER SUB-AGENT\n```python\nparsed_request = {\n    \"intent\": \"access_request\",\n    \"sub_intent\": \"missing_application\",\n    \"entities\": {\n        \"application\": \"Figma\",\n        \"platform\": \"Okta\", \n        \"user\": \"Sarah Chen\",\n        \"department\": \"Marketing\",\n        \"urgency\": \"normal\",\n        \"business_context\": \"campaign reviews\"\n    },\n    \"sentiment\": \"polite_frustrated\",\n    \"confidence\": 0.94\n}\n```",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 3000),
-    reactions: []
-  }, {
-    id: 'ith-5',
-    userId: 'it-bot',
-    username: 'IT Bot',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:06 AM] IT Bot Update in Slack\n📊 Quick update @Sarah Chen:\n\n✅ Found your profile\n✅ Verified you're in Marketing team\n⚡ Checking Figma access requirements...",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 6000),
-    reactions: []
-  }, {
-    id: 'ith-6',
-    userId: 'system',
-    username: 'System',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:04 - 9:47:06] IDENTITY DOMAIN (OKTA) ACTIVATION\n```python\nuser_context = {\n    \"user\": {\n        \"name\": \"Sarah Chen\",\n        \"email\": \"sarah.chen@company.com\",\n        \"department\": \"Marketing\",\n        \"role\": \"Marketing Manager\",\n        \"manager\": \"David Kim\",\n        \"location\": \"San Francisco\",\n        \"start_date\": \"2022-03-15\",\n        \"risk_level\": \"standard\"\n    },\n    \"current_access\": {\n        \"okta_apps\": [\n            \"Slack\", \"Gmail\", \"Salesforce\", \"Box\", \n            \"Zoom\", \"Monday.com\", \"Adobe Creative\"\n        ],\n        \"missing\": [\"Figma\"],\n        \"okta_groups\": [\n            \"marketing-team\",\n            \"managers-global\",\n            \"sf-office\"\n        ]\n    },\n    \"team_access\": {\n        \"design_team_has_figma\": true,\n        \"marketing_typically_has\": false,\n        \"recent_team_additions\": [\"Jake Lee\", \"Monica Patel\"]\n    }\n}\n```",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 7000),
-    reactions: []
-  }, {
-    id: 'ith-7',
-    userId: 'system',
-    username: 'System',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:06 - 9:47:08] POLICY ENGINE SUB-AGENT CHECK\n```python\npolicy_validation = {\n    \"user\": \"sarah.chen@company.com\",\n    \"requested_app\": \"Figma\",\n    \"checks\": {\n        \"role_eligible\": true,\n        \"department_approved\": true,\n        \"license_available\": true,\n        \"budget_check\": true,\n        \"compliance\": true,\n        \"manager_pre_approval\": true\n    },\n    \"decision\": \"AUTO_APPROVE\",\n    \"license_type\": \"viewer_with_comment\",\n    \"monthly_cost\": \"$0\"\n}\n```",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 9000),
-    reactions: []
-  }, {
-    id: 'ith-8',
-    userId: 'system',
-    username: 'System',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:08 - 9:47:10] ACCESS CONTROL DOMAIN ACTIVATION\nApplication Provisioning Sub-Agent\n```python\nprovisioning_request = {\n    \"action\": \"provision_figma_access\",\n    \"user\": \"sarah.chen@company.com\",\n    \"steps_executed\": [\n        {\n            \"step\": \"figma_api_call\",\n            \"endpoint\": \"POST /v1/teams/members\",\n            \"payload\": {\n                \"email\": \"sarah.chen@company.com\",\n                \"role\": \"viewer_restricted\",\n                \"team_id\": \"company_marketing\"\n            },\n            \"response\": \"success\",\n            \"figma_user_id\": \"usr_789012\"\n        }\n    ]\n}\n```\nOkta Management Sub-Agent\n```python\nokta_configuration = {\n    \"step_1\": {\n        \"action\": \"assign_application\",\n        \"api_call\": \"PUT /api/v1/apps/0oa1234figma/users\",\n        \"payload\": {\n            \"id\": \"sarah.chen@company.com\",\n            \"scope\": \"USER\",\n            \"credentials\": {\n                \"userName\": \"sarah.chen@company.com\"\n            }\n        },\n        \"result\": \"success\"\n    },\n    \"step_2\": {\n        \"action\": \"configure_saml\",\n        \"attributes\": {\n            \"email\": \"sarah.chen@company.com\",\n            \"firstName\": \"Sarah\",\n            \"lastName\": \"Chen\",\n            \"role\": \"viewer\"\n        },\n        \"result\": \"configured\"\n    },\n    \"step_3\": {\n        \"action\": \"add_to_group\",\n        \"group\": \"figma-marketing-users\",\n        \"result\": \"added\"\n    }\n}\n```",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 11000),
-    reactions: []
-  }, {
-    id: 'ith-9',
-    userId: 'it-bot',
-    username: 'IT Bot',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:10 AM] IT Bot Progress Update\n🎯 Good news! I'm setting up your Figma access now:\n\n✅ Figma account created\n✅ Adding to Okta dashboard\n⚙️ Configuring single sign-on...",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 12000),
-    reactions: []
-  }, {
-    id: 'ith-10',
-    userId: 'system',
-    username: 'System',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:10 - 9:47:12] ACCESS VERIFICATION SUB-AGENT\n```python\nverification_steps = {\n    \"sso_test\": {\n        \"action\": \"simulate_login\",\n        \"user\": \"sarah.chen@company.com\",\n        \"flow\": [\n            \"Okta login simulation\",\n            \"SAML assertion generated\",\n            \"Figma accepts assertion\",\n            \"Session created successfully\"\n        ],\n        \"result\": \"PASSED\"\n    },\n    \"tile_visibility\": {\n        \"action\": \"verify_okta_dashboard\",\n        \"check\": \"GET /api/v1/users/sarah.chen/appLinks\",\n        \"figma_visible\": true,\n        \"position\": 12\n    },\n    \"permission_check\": {\n        \"figma_access_level\": \"viewer\",\n        \"can_comment\": true,\n        \"can_edit\": false,\n        \"team_boards_visible\": true\n    }\n}\n```",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 14000),
-    reactions: []
-  }, {
-    id: 'ith-11',
-    userId: 'system',
-    username: 'System',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:12 - 9:47:13] NOTIFICATION SUB-AGENT\n```python\nnotification_queue = [\n    {\n        \"channel\": \"slack\",\n        \"recipient\": \"sarah.chen\",\n        \"thread\": \"1234567890.123456\"\n    },\n    {\n        \"channel\": \"email\",\n        \"recipient\": \"sarah.chen@company.com\",\n        \"template\": \"app_provisioned\"\n    },\n    {\n        \"channel\": \"okta\",\n        \"action\": \"push_notification\",\n        \"message\": \"New app available: Figma\"\n    }\n]\n```",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 15000),
-    reactions: []
-  }, {
-    id: 'ith-12',
-    userId: 'it-bot',
-    username: 'IT Bot',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:13 AM] IT Bot Success Message\n✅ All done @Sarah Chen! Your Figma access is ready! 🎉\n\nHere's what I've set up for you:\n📱 **Figma tile** - Now visible in your Okta dashboard\n👤 **Access level** - Viewer with commenting rights\n🔐 **Login method** - Use your Okta SSO (no separate password needed)\n\n**Quick Start:**\n1. Go to https://company.okta.com\n2. You'll see the Figma tile (might need to refresh)\n3. Click it to auto-login to Figma\n4. You'll have access to all Marketing team boards\n\nNeed edit access later? Just let me know! \n\n🎯 *Resolved in: 12 seconds*",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 16000),
-    reactions: []
-  }, {
-    id: 'ith-13',
-    userId: 'user1',
-    username: 'Sarah Chen',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:14 AM] Sarah's Response\nslackSarah Chen: Wow that was fast! I can see it now! Thanks!! 🙌",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 17000),
-    reactions: []
-  }, {
-    id: 'ith-14',
-    userId: 'it-bot',
-    username: 'IT Bot',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
-    content: "[9:47:15 AM] IT Bot Follow-up\nAwesome! Happy to help! 😊 \n\nQuick tip: Your design team lead (Jake) can give you edit access to specific boards if needed. Enjoy Figma! \n\n_Ticket #TK-2024-8847 auto-closed_",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 18000),
-    reactions: []
-  }, {
-    id: 'ith-15',
-    userId: 'system',
-    username: 'System',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
-    content: "📊 BEHIND THE SCENES - LEARNING & IMPROVEMENT\n[9:47:15 - 9:47:16] KNOWLEDGE & LEARNING DOMAIN - POST RESOLUTION\nKnowledge Capture Sub-Agent\n```python\ncaptured_knowledge = {\n    \"ticket_id\": \"TK-2024-8847\",\n    \"pattern\": \"Marketing manager needs Figma for reviews\",\n    \"resolution_time\": 12,\n    \"success\": true,\n    \"user_satisfaction\": \"positive\",\n    \"new_insight\": \"Marketing managers reviewing design work pattern\",\n    \"automation_worked\": true\n}\n```\nContinuous Learning Sub-Agent\n```python\nmodel_update = {\n    \"pattern_reinforced\": \"marketing_figma_access\",\n    \"confidence_adjustment\": {\n        \"before\": 0.94,\n        \"after\": 0.95\n    },\n    \"new_rule_suggested\": {\n        \"rule\": \"Auto-provision Figma viewer for all Marketing Managers\",\n        \"confidence\": 0.87,\n        \"pending_approval\": true\n    }\n}\n```\nPattern Recognition Update\n```python\ntrend_detected = {\n    \"observation\": \"30% increase in Figma requests from Marketing\",\n    \"hypothesis\": \"New design review process implemented\",\n    \"recommendation\": \"Consider bulk provisioning for Marketing dept\",\n    \"alert_sent_to\": \"IT Manager\"\n}\n```",
-    timestamp: new Date(Date.now() - 1000 * 60 * 10 + 19000),
-    reactions: []
-  }]
+
 };
 
 export const ChatInterface = () => {
@@ -453,6 +326,12 @@ export const ChatInterface = () => {
   const [typingUser, setTypingUser] = useState('');
   const [currentChannel, setCurrentChannel] = useState('general');
   const [currentDM, setCurrentDM] = useState<string | null>(null);
+  const [isSimulationActive, setIsSimulationActive] = useState(false);
+  
+  // Reset simulation state on DM change
+  useEffect(() => {
+    setIsSimulationActive(false);
+  }, [currentDM]);
   const [threadPanelOpen, setThreadPanelOpen] = useState(false);
   const [selectedThreadMessage, setSelectedThreadMessage] = useState<Message | null>(null);
   const [transcriptWs, setTranscriptWs] = useState<WebSocket | null>(null);
@@ -505,7 +384,6 @@ export const ChatInterface = () => {
   const initializeTranscriptCapture = async () => {
     const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
     if (!apiKey) {
-      console.warn('ElevenLabs API key not found. Transcript capture disabled.');
       return;
     }
 
@@ -680,6 +558,141 @@ export const ChatInterface = () => {
       closeTranscriptCapture();
     };
   }, [currentDM]);
+  // Automated helpdesk simulation responses
+  const simulateHelpdeskFlow = async (userMessage: string) => {
+    if (isSimulationActive) return;
+    setIsSimulationActive(true);
+
+    const helpdeskResponses = [
+      {
+        delay: 15000,
+        userId: 'it-bot',
+        username: 'IT Bot',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+        content: "Hi @Richard Johnson! 👋 I see you're missing the Figma tile in Okta.\nLogging ticket ID OKT-4536387 for this purpose in Jira.\nLet me check this for you right away.\n\n🔍 Checking your current access..."
+      },
+      {
+        delay: 15000,
+        userId: 'system',
+        username: 'System',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
+        content: "🤖 BEHIND THE SCENES - AGENT ORCHESTRATION\n[9:47:01 - 9:47:02] MASTER ORCHESTRATOR ACTIVATION\n```python\n{\n    \"timestamp\": \"9:47:01\",\n    \"trigger\": \"Slack webhook from #it-help\",\n    \"raw_message\": \"I can't see Figma in my Okta apps...\",\n    \"user\": \"richard.johnson@company.com\",\n    \"channel\": \"it-help\",\n    \"thread_ts\": \"1234567890.123456\"\n}\n```\n\n# Master Orchestrator routes to Knowledge & Learning Domain first"
+      },
+      {
+        delay: 15000,
+        userId: 'system',
+        username: 'System',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
+        content: "[9:47:02 - 9:47:03] KNOWLEDGE & LEARNING DOMAIN\nKnowledge Capture Sub-Agent\n```python\ncapture_context = {\n    \"user_message\": \"can't see Figma in my Okta apps\",\n    \"extracted_intent\": \"missing_okta_tile\",\n    \"application\": \"Figma\",\n    \"platform\": \"Okta\",\n    \"channel\": \"Slack\",\n    \"historical_patterns\": [\n        \"Similar to 847 previous 'missing tile' requests\",\n        \"Figma requests increased 300% this month\"\n    ]\n}\n```"
+      },
+      {
+        delay: 15000,
+        userId: 'system',
+        username: 'System',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
+        content: "Pattern Recognition Sub-Agent\n```python\npattern_analysis = {\n    \"pattern_match\": \"OKTA_TILE_VISIBILITY_ISSUE\",\n    \"confidence\": 0.94,\n    \"similar_tickets\": 847,\n    \"resolution_success_rate\": 0.92,\n    \"avg_time_to_resolve\": \"3.2 minutes\",\n    \"recommended_flow\": \"AUTOMATED_PROVISIONING\"\n}\n```\n\n[9:47:03 - 9:47:04] NLP PARSER SUB-AGENT\n```python\nparsed_request = {\n    \"intent\": \"access_request\",\n    \"sub_intent\": \"missing_application\",\n    \"entities\": {\n        \"application\": \"Figma\",\n        \"platform\": \"Okta\", \n        \"user\": \"Richard Johnson\",\n        \"department\": \"Marketing\",\n        \"urgency\": \"normal\",\n        \"business_context\": \"campaign reviews\"\n    },\n    \"sentiment\": \"polite_frustrated\",\n    \"confidence\": 0.94\n}\n```"
+      },
+      {
+        delay: 15000,
+        userId: 'it-bot',
+        username: 'IT Bot',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+        content: "📊 Quick update @Richard Johnson:\n\n✅ Found your profile\n✅ Verified you're in Marketing team\n⚡ Checking Figma access requirements..."
+      },
+      {
+        delay: 15000,
+        userId: 'system',
+        username: 'System',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
+        content: "[9:47:04 - 9:47:06] IDENTITY DOMAIN (OKTA) ACTIVATION\n```python\nuser_context = {\n    \"user\": {\n        \"name\": \"Richard Johnson\",\n        \"email\": \"richard.johnson@company.com\",\n        \"department\": \"Marketing\",\n        \"role\": \"Marketing Manager\",\n        \"manager\": \"David Kim\",\n        \"location\": \"San Francisco\",\n        \"start_date\": \"2022-03-15\",\n        \"risk_level\": \"standard\"\n    },\n    \"current_access\": {\n        \"okta_apps\": [\n            \"Slack\", \"Gmail\", \"Salesforce\", \"Box\", \n            \"Zoom\", \"Monday.com\", \"Adobe Creative\"\n        ],\n        \"missing\": [\"Figma\"],\n        \"okta_groups\": [\n            \"marketing-team\",\n            \"managers-global\",\n            \"sf-office\"\n        ]\n    }\n}\n```"
+      },
+      {
+        delay: 15000,
+        userId: 'system',
+        username: 'System',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
+        content: "[9:47:06 - 9:47:08] POLICY ENGINE SUB-AGENT CHECK\n```python\npolicy_validation = {\n    \"user\": \"richard.johnson@company.com\",\n    \"requested_app\": \"Figma\",\n    \"checks\": {\n        \"role_eligible\": true,\n        \"department_approved\": true,\n        \"license_available\": true,\n        \"budget_check\": true,\n        \"compliance\": true,\n        \"manager_pre_approval\": true\n    },\n    \"decision\": \"AUTO_APPROVE\",\n    \"license_type\": \"viewer_with_comment\",\n    \"monthly_cost\": \"$0\"\n}\n```"
+      },
+      {
+        delay: 15000,
+        userId: 'it-bot',
+        username: 'IT Bot',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+        content: "🎯 Good news! I'm setting up your Figma access now:\n\n✅ Figma account created\n✅ Adding to Okta dashboard\n⚙️ Configuring single sign-on..."
+      },
+      {
+        delay: 15000,
+        userId: 'system',
+        username: 'System',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
+        content: "[9:47:08 - 9:47:10] ACCESS CONTROL DOMAIN ACTIVATION\nApplication Provisioning Sub-Agent\n```python\nprovisioning_request = {\n    \"action\": \"provision_figma_access\",\n    \"user\": \"richard.johnson@company.com\",\n    \"steps_executed\": [\n        {\n            \"step\": \"figma_api_call\",\n            \"endpoint\": \"POST /v1/teams/members\",\n            \"payload\": {\n                \"email\": \"richard.johnson@company.com\",\n                \"role\": \"viewer_restricted\",\n                \"team_id\": \"company_marketing\"\n            },\n            \"response\": \"success\",\n            \"figma_user_id\": \"usr_789012\"\n        }\n    ]\n}\n```"
+      },
+      {
+        delay: 15000,
+        userId: 'system',
+        username: 'System',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
+        content: "Okta Management Sub-Agent\n```python\nokta_configuration = {\n    \"step_1\": {\n        \"action\": \"assign_application\",\n        \"api_call\": \"PUT /api/v1/apps/0oa1234figma/users\",\n        \"payload\": {\n            \"id\": \"richard.johnson@company.com\",\n            \"scope\": \"USER\",\n            \"credentials\": {\n                \"userName\": \"richard.johnson@company.com\"\n            }\n        },\n        \"result\": \"success\"\n    },\n    \"step_2\": {\n        \"action\": \"configure_saml\",\n        \"attributes\": {\n            \"email\": \"richard.johnson@company.com\",\n            \"firstName\": \"Richard\",\n            \"lastName\": \"Johnson\",\n            \"role\": \"viewer\"\n        },\n        \"result\": \"configured\"\n    }\n}\n```"
+      },
+      {
+        delay: 15000,
+        userId: 'it-bot',
+        username: 'IT Bot',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+        content: "✅ All done @Richard Johnson! Your Figma access is ready! 🎉\n\nHere's what I've set up for you:\n📱 **Figma tile** - Now visible in your Okta dashboard\n👤 **Access level** - Viewer with commenting rights\n🔐 **Login method** - Use your Okta SSO (no separate password needed)\n\n**Quick Start:**\n1. Go to https://company.okta.com\n2. You'll see the Figma tile (might need to refresh)\n3. Click it to auto-login to Figma\n4. You'll have access to all Marketing team boards\n\nNeed edit access later? Just let me know! \n\n🎯 *Ticket OKT-4536387 resolved in: 2 minutes 45 seconds*"
+      }
+    ];
+
+    // Add each response with delays and typing indicators
+    try {
+      for (let i = 0; i < helpdeskResponses.length; i++) {
+        const currentResponse = helpdeskResponses[i];
+        
+        // Show typing indicator
+        setIsTyping(true);
+        setTypingUser(currentResponse.username);
+        
+        await new Promise<void>(resolve => {
+          setTimeout(() => {
+            try {
+              // Hide typing indicator
+              setIsTyping(false);
+              setTypingUser('');
+              
+              const newMessage: Message = {
+                id: `sim-${Date.now()}-${i}`,
+                userId: currentResponse.userId,
+                username: currentResponse.username,
+                avatar: currentResponse.avatar,
+                content: currentResponse.content,
+                timestamp: new Date(),
+                reactions: []
+              };
+              
+              setMessages(prev => [...prev, newMessage]);
+              
+              if (currentDM && DM_MESSAGES[currentDM]) {
+                DM_MESSAGES[currentDM].push(newMessage);
+              }
+              
+              resolve();
+            } catch (error) {
+              setIsTyping(false);
+              setTypingUser('');
+              resolve();
+            }
+          }, currentResponse.delay);
+        });
+      }
+    } catch (error) {
+      console.error('Error in simulation:', error);
+    } finally {
+      setIsTyping(false);
+      setTypingUser('');
+      setIsSimulationActive(false);
+    }
+  };
+
   const handleSendMessage = (content: string, files?: File[]) => {
     const newMessage: Message = {
       id: Date.now().toString(),
@@ -706,7 +719,79 @@ export const ChatInterface = () => {
       DM_MESSAGES[currentDM].push(newMessage);
     }
 
-    // Simulate typing indicator for response
+    // Check if this is a helpdesk conversation and trigger simulation
+    const contentLower = content.toLowerCase();
+    const isFigmaRequest = contentLower.includes('figma') || 
+                          contentLower.includes('okta') || 
+                          contentLower.includes('access') ||
+                          contentLower.includes('app') ||
+                          contentLower.includes('simulate'); // Add trigger word for testing
+    const isThanksMessage = contentLower.includes('thanks') || 
+                           contentLower.includes('thank you') ||
+                           contentLower.includes('thx');
+    const isHelpdeskChannel = currentDM === 'dm5' || currentDM === 'dm6' || currentChannel === 'it-help';
+    
+    // Check if simulation should trigger
+    if (isFigmaRequest && isHelpdeskChannel) {
+      simulateHelpdeskFlow(content);
+      return;
+    }
+    
+    // Handle thanks messages
+    if (isThanksMessage && isHelpdeskChannel) {
+      setIsTyping(true);
+      setTypingUser('IT Bot');
+      setTimeout(() => {
+        const thanksResponse: Message = {
+          id: (Date.now() + 1).toString(),
+          userId: 'it-bot',
+          username: 'IT Bot',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+          content: 'Thank you for reaching out. Am now closing the ticket OKT-4536387. If you need any further help do let me know! 😊',
+          timestamp: new Date(),
+          reactions: []
+        };
+        setMessages(prev => [...prev, thanksResponse]);
+        
+        if (currentChannel && CHANNEL_MESSAGES[currentChannel]) {
+          CHANNEL_MESSAGES[currentChannel].push(thanksResponse);
+        } else if (currentDM && DM_MESSAGES[currentDM]) {
+          DM_MESSAGES[currentDM].push(thanksResponse);
+        }
+        
+        setIsTyping(false);
+        setTypingUser('');
+      }, 2000);
+      return;
+    }
+
+    // Default response for non-helpdesk conversations
+    if (isHelpdeskChannel) {
+      setIsTyping(true);
+      setTypingUser('IT Bot');
+      setTimeout(() => {
+        const botResponse: Message = {
+          id: (Date.now() + 1).toString(),
+          userId: 'it-bot',
+          username: 'IT Bot',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+          content: 'Thanks for reaching out! 👋 I\'m here to help with any IT issues. Could you provide more details about what you need assistance with?',
+          timestamp: new Date(),
+          reactions: []
+        };
+        setMessages(prev => [...prev, botResponse]);
+        
+        if (currentChannel && CHANNEL_MESSAGES[currentChannel]) {
+          CHANNEL_MESSAGES[currentChannel].push(botResponse);
+        } else if (currentDM && DM_MESSAGES[currentDM]) {
+          DM_MESSAGES[currentDM].push(botResponse);
+        }
+        
+        setIsTyping(false);
+        setTypingUser('');
+      }, 2000);
+    } else {
+      // Regular conversation response
     setIsTyping(true);
     setTypingUser('Assistant');
     setTimeout(() => {
@@ -721,7 +806,6 @@ export const ChatInterface = () => {
       };
       setMessages(prev => [...prev, botResponse]);
       
-      // Update the channel or DM messages collection
       if (currentChannel && CHANNEL_MESSAGES[currentChannel]) {
         CHANNEL_MESSAGES[currentChannel].push(botResponse);
       } else if (currentDM && DM_MESSAGES[currentDM]) {
@@ -731,6 +815,7 @@ export const ChatInterface = () => {
       setIsTyping(false);
       setTypingUser('');
     }, 2000);
+    }
   };
   const handleAddReaction = (messageId: string, emoji: string) => {
     setMessages(prev => prev.map(message => {
@@ -884,7 +969,7 @@ export const ChatInterface = () => {
   const channelInfo = getChannelInfo();
   return <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
-      <Sidebar workspaceName="Company" currentUser={currentUser} onChannelSelect={handleChannelSelect} onDMSelect={handleDMSelect} onChannelCreate={handleChannelCreate} onChannelJoin={handleChannelJoin} onOpenKB={() => setShowKB(true)} />
+      <Sidebar workspaceName="Company" currentUser={currentUser} onChannelSelect={handleChannelSelect} onDMSelect={handleDMSelect} onChannelCreate={handleChannelCreate} onChannelJoin={handleChannelJoin} onOpenKB={() => setShowKB(true)} currentChannel={currentChannel} currentDM={currentDM} />
       
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col">
@@ -892,7 +977,7 @@ export const ChatInterface = () => {
         
         <MessageList messages={messages} onAddReaction={handleAddReaction} onOpenThread={handleOpenThread} isTyping={isTyping} typingUser={typingUser} />
         
-        <MessageInput onSendMessage={handleSendMessage} placeholder={`Message #${channelInfo.name}`} />
+        <MessageInput onSendMessage={handleSendMessage} placeholder={`Message #${channelInfo.name}${currentDM ? ` (DM: ${currentDM})` : ''}`} onOpenKB={() => setShowKB(true)} />
         
         {/* Knowledge Base Drawer */}
         {showKB && (
@@ -936,11 +1021,7 @@ export const ChatInterface = () => {
               </div>
             </div>
             
-            {!import.meta.env.VITE_ELEVENLABS_API_KEY && (
-              <div className="mb-3 p-2 bg-yellow-100 border border-yellow-300 rounded text-sm text-yellow-800">
-                ⚠️ Transcript capture disabled: API key not configured
-              </div>
-            )}
+
             
             <elevenlabs-convai agent-id="agent_0701k38wmdtter699jn3f9vx3a2d"></elevenlabs-convai>
           </div>

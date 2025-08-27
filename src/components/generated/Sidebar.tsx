@@ -37,6 +37,8 @@ interface SidebarProps {
   }) => void;
   onChannelJoin?: (channelId: string) => void;
   onOpenKB?: () => void;
+  currentChannel?: string;
+  currentDM?: string;
 }
 const MOCK_CHANNELS: Channel[] = [{
   id: 'general',
@@ -102,7 +104,9 @@ export const Sidebar = ({
   onDMSelect,
   onChannelCreate,
   onChannelJoin,
-  onOpenKB
+  onOpenKB,
+  currentChannel,
+  currentDM
 }: SidebarProps) => {
   const [channelsExpanded, setChannelsExpanded] = useState(true);
   const [dmsExpanded, setDmsExpanded] = useState(true);
@@ -226,7 +230,7 @@ export const Sidebar = ({
             duration: 0.2
           }} className="overflow-hidden">
                 <div className="space-y-1 mt-1">
-                  {channels.map(channel => <button key={channel.id} onClick={() => onChannelSelect(channel.id)} className={`w-full flex items-center justify-between px-6 py-1.5 text-sm hover:bg-slack-hover rounded transition-colors ${channel.isActive ? 'bg-slack-active text-white' : 'text-slack-text'}`}>
+                  {channels.map(channel => <button key={channel.id} onClick={() => onChannelSelect(channel.id)} className={`w-full flex items-center justify-between px-6 py-1.5 text-sm hover:bg-slack-hover rounded transition-colors ${currentChannel === channel.id ? 'bg-slack-active text-white' : 'text-slack-text'}`}>
                       <div className="flex items-center space-x-2 min-w-0">
                         {channel.type === 'public' ? <Hash className="w-4 h-4 flex-shrink-0" /> : <Lock className="w-4 h-4 flex-shrink-0" />}
                         <span className="truncate">{channel.name}</span>
@@ -266,7 +270,7 @@ export const Sidebar = ({
             duration: 0.2
           }} className="overflow-hidden">
                 <div className="space-y-1 mt-1">
-                  {MOCK_DMS.map(dm => <button key={dm.id} onClick={() => onDMSelect(dm.id)} className={`w-full flex items-center justify-between px-6 py-1.5 text-sm hover:bg-slack-hover rounded transition-colors ${dm.isActive ? 'bg-slack-active text-white' : 'text-slack-text'}`}>
+                  {MOCK_DMS.map(dm => <button key={dm.id} onClick={() => onDMSelect(dm.id)} className={`w-full flex items-center justify-between px-6 py-1.5 text-sm hover:bg-slack-hover rounded transition-colors ${currentDM === dm.id ? 'bg-slack-active text-white' : 'text-slack-text'}`}>
                       <div className="flex items-center space-x-2 min-w-0">
                         <div className="relative flex-shrink-0">
                           <img src={dm.avatar} alt={dm.username} className="w-5 h-5 rounded object-cover" />

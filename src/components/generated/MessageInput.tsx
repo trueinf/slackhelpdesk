@@ -5,12 +5,14 @@ import { Send, Smile, Paperclip, AtSign, Hash, Bold, Italic, Code, X } from 'luc
 interface MessageInputProps {
   onSendMessage: (content: string, files?: File[]) => void;
   placeholder?: string;
+  onOpenKB?: () => void;
 }
 
 // @component: MessageInput
 export const MessageInput = ({
   onSendMessage,
-  placeholder = "Message #general"
+  placeholder = "Message #general",
+  onOpenKB
 }: MessageInputProps) => {
   const [message, setMessage] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
@@ -146,13 +148,23 @@ export const MessageInput = ({
             
             {/* Inline KB suggestions */}
             {kbSuggestions.length > 0 && (
-              <div className="absolute left-0 right-16 -top-28 bg-white border border-gray-200 rounded-lg shadow p-2 text-sm">
-                <div className="text-[11px] text-gray-500 mb-1">Related knowledge</div>
-                <div className="space-y-1 max-h-24 overflow-y-auto">
+              <div className="absolute left-0 right-0 bottom-full mb-2 bg-white border border-gray-200 rounded-lg shadow-lg p-3 text-sm z-10">
+                <div className="text-[11px] text-gray-500 mb-2 font-medium">Related knowledge</div>
+                <div className="space-y-2 max-h-32 overflow-y-auto">
                   {kbSuggestions.map(s => (
-                    <div key={s.id} className="px-2 py-1 rounded hover:bg-gray-50">
-                      <div className="font-medium text-gray-900 text-xs">{s.title}</div>
-                      <div className="text-[11px] text-gray-600 line-clamp-1">{s.summary}</div>
+                    <div 
+                      key={s.id} 
+                      className="px-3 py-2 rounded-md hover:bg-gray-50 cursor-pointer transition-colors"
+                      onClick={() => {
+                        if (onOpenKB) {
+                          // Store the selected article ID for the KB component to display
+                          sessionStorage.setItem('selectedKBArticle', s.id);
+                          onOpenKB();
+                        }
+                      }}
+                    >
+                      <div className="font-medium text-gray-900 text-xs leading-tight">{s.title}</div>
+                      <div className="text-[11px] text-gray-600 mt-1 line-clamp-2">{s.summary}</div>
                     </div>
                   ))}
                 </div>
