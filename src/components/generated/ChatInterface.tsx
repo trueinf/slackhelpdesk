@@ -8,6 +8,18 @@ import { Sidebar } from './Sidebar';
 import { ThreadPanel } from './ThreadPanel';
 import { KBBrowser } from '../kb/KBBrowser';
 import { KBPalette } from '../kb/KBPalette';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'elevenlabs-convai': {
+        'agent-id'?: string;
+        [key: string]: any;
+      };
+    }
+  }
+}
+
 interface Message {
   id: string;
   userId: string;
@@ -1023,7 +1035,8 @@ export const ChatInterface = () => {
             
             
             
-            {/* <elevenlabs-convai agent-id="agent_0701k38wmdtter699jn3f9vx3a2d"></elevenlabs-convai> */}
+            {React.createElement('elevenlabs-convai', { 'agent-id': 'agent_0701k38wmdtter699jn3f9vx3a2d' } as any)}
+            <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
           </div>
         )}
       </div>
